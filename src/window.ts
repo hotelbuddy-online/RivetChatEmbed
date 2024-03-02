@@ -9,13 +9,13 @@ type BotProps = {
 };
 
 export const initFull = (props: BotProps & { id?: string }) => {
-  const fullElement = props.id ? document.getElementById(props.id) : document.querySelector('flowise-fullchatbot');
-  if (!fullElement) throw new Error('<flowise-fullchatbot> element not found.');
+  const fullElement = props.id ? document.getElementById(props.id) : document.querySelector('rivet-fullchatbot');
+  if (!fullElement) throw new Error('<rivet-fullchatbot> element not found.');
   Object.assign(fullElement, props);
 };
 
 export const init = (props: BotProps) => {
-  const element = document.createElement('flowise-chatbot');
+  const element = document.createElement('rivet-chatbot');
   Object.assign(element, props);
   document.body.appendChild(element);
 };

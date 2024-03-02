@@ -269,7 +269,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
       body,
     });
 
-    if (result.data) {
+    if (result && result.data) {
       const data = result.data;
       if (!isChatFlowAvailableToStream()) {
         let text = '';
@@ -373,11 +373,15 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     const socket = socketIOClient(props.apiHost as string);
 
     socket.on('connect', () => {
+      console.log('socket connected');
       setSocketIOClientId(socket.id);
     });
 
     socket.on('start', () => {
-      setMessages((prevMessages) => [...prevMessages, { message: '', type: 'apiMessage' }]);
+      setMessages((prevMessages) => {
+        console.log('socket start, prev messages:', JSON.stringify(prevMessages));
+        return [...prevMessages, { message: '', type: 'apiMessage' }];
+      });
     });
 
     socket.on('sourceDocuments', updateLastMessageSourceDocuments);

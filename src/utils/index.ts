@@ -13,6 +13,7 @@ export const sendRequest = async <ResponseData>(
         method: string;
         body?: Record<string, unknown> | FormData;
         type?: string;
+        token?: string; // Add an optional token parameter
       }
     | string,
 ): Promise<{ data?: ResponseData; error?: Error }> => {
@@ -22,9 +23,11 @@ export const sendRequest = async <ResponseData>(
       method: typeof params === 'string' ? 'GET' : params.method,
       mode: 'cors',
       headers:
-        typeof params !== 'string' && isDefined(params.body)
+        typeof params !== 'string'
           ? {
-              'Content-Type': 'application/json',
+              ...(isDefined(params.body) ? { 'Content-Type': 'application/json' } : {}),
+              // Conditionally add the Authorization header if a token is provided
+              ...(params.token ? { Authorization: `Bearer ${params.token}` } : {}),
             }
           : undefined,
       body: typeof params !== 'string' && isDefined(params.body) ? JSON.stringify(params.body) : undefined,
@@ -56,3 +59,7 @@ export const sendRequest = async <ResponseData>(
     return { error: e as Error };
   }
 };
+
+// function isDefined<T>(value: T | undefined): value is T {
+//   return value !== undefined;
+// }

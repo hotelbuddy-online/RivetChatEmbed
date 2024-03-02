@@ -1,2 +1,10 @@
 node_modules
 .idea
+dist
+dist/web.js
+dist/components/Bot.d.ts.map
+dist/features/bubble/components/Bubble.d.ts.map
+dist/queries/sendMessageQuery.d.ts
+dist/queries/sendMessageQuery.d.ts.map
+dist/utils/index.d.ts
+dist/utils/index.d.ts.map
