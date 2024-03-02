@@ -9,12 +9,15 @@ export type IncomingInput = {
 };
 export type MessageRequest = {
     chatflowid?: string;
+    model?: string;
     apiHost?: string;
     body?: IncomingInput;
 };
 export declare const sendMessageQuery: ({ chatflowid, apiHost, body }: MessageRequest) => Promise<{
     data?: any;
     error?: Error | undefined;
+} | {
+    error: string;
 }>;
 export declare const getChatbotConfig: ({ chatflowid, apiHost }: MessageRequest) => Promise<{
     data?: any;
